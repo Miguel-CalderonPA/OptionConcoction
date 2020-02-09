@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7CB342"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/btn_delRoul"
+        android:layout_width="54dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="#00FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roul"
+        app:layout_constraintVertical_bias="0.358"
+        app:srcCompat="@drawable/minus" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="64dp"
+        android:layout_height="33dp"
+        android:background="#113312"
+        android:shadowColor="#000000"
+        android:text="back"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roul"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/roul"
+        android:layout_width="340dp"
+        android:layout_height="362dp"
+        android:layout_marginTop="65dp"
+        android:background="#0000897B"
+        app:layout_constraintBottom_toTopOf="@+id/btn_redo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/roul7" />
+
+    <ImageButton
+        android:id="@+id/btn_redo"
+        android:layout_width="73dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="46dp"
+        android:background="#00BE0B0B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roul"
+        app:srcCompat="@drawable/redo" />
+
+    <ImageButton
+        android:id="@+id/btn_addRoul"
+        android:layout_width="53dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="#00160808"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roul"
+        app:layout_constraintVertical_bias="0.38"
+        app:srcCompat="@drawable/plus" />
+
+    <ImageView
+        android:id="@+id/imgPointer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/roul"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pointer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
