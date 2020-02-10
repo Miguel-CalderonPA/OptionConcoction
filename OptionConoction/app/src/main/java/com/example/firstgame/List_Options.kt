@@ -1,7 +1,6 @@
 package com.example.firstgame
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_list_options.*
-import kotlinx.android.synthetic.main.list_row.*
 import java.io.File
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import android.widget.AdapterView
@@ -29,17 +26,18 @@ class List_Options : AppCompatActivity() {
 
         // Set variables
         val listview = findViewById<ListView>(R.id.main_listview)
-        val  newColor = Color.parseColor("#FFFF00")
+        val  newColor = Color.parseColor("#DDBE19")
         listview.setBackgroundColor(newColor)
 
 
 
         //------------------------------------------------------------------------------------------
 
-
         btn_addR.setOnClickListener {
 
             var newRestaurant: String = txt_NewR.text.toString()
+
+            //--------------------------------------------------------------------------------------
 
             if(newRestaurant.trim().isEmpty()) {
                 Log.d("Add Clicked", "new restaurant to added")
@@ -57,21 +55,25 @@ class List_Options : AppCompatActivity() {
                 val letDirectory = File(path, "LET")
                 letDirectory.mkdirs()
                 val file = File(letDirectory, "test.txt")
-
                 file.appendText(newRestaurant)
 
+                // reset filetext
                 val filetext: MutableList<String>  = file.bufferedReader().readLines().toMutableList()
                 println("Adding size: ${filetext.size}")
+
                 //  my custom adapter telling my list what to restaurants show
                 listview.adapter = MyAdapter(this, filetext)
 
-
+                // testing
+                /*
                 for (line in filetext) {
                     println("$line" )
                     val pos = filetext.indexOf(line)
                     println("$pos")
-                }
-                finish();
+                } */
+
+                // needs revising
+                finish()
                 overridePendingTransition(0, 0)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
@@ -85,37 +87,35 @@ class List_Options : AppCompatActivity() {
         //------------------------------------------------------------------------------------------
 
         Log.d("Created", "List page was created")
-
+        // open file and/or create
         val path = applicationContext.getFilesDir()
         val letDirectory = File(path, "LET")
         letDirectory.mkdirs()
         val file = File(letDirectory, "test.txt")
         if(!file.exists()) {
             file.createNewFile()
-        }
+        } // end if file exists
 
-       // file.delete()
+        // reads data from file then sends this to filetext
         val filetext: MutableList<String>  = file.bufferedReader().readLines().toMutableList()
-        println("Intial size: ${filetext.size}")
+        println("Intial size: ${filetext.size}") // testing
         listview.adapter = MyAdapter(this, filetext)  //  my custom adapter telling my list what to restaurants show
         val listView:ListView = findViewById(R.id.main_listview)
 
+        //------------------------------------------------------------------------------------------
 
-       // val listEdit:ListView = findViewById(R.id.main_listview)
-       // listEdit.adapter = listview.adapter
-        listview.onItemClickListener = object : AdapterView.OnItemClickListener {
+        listview.onItemClickListener = object : OnItemClickListener {
 
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long ) {
                 Log.d("del", "write to file")
 
-                println(position)
+                // let user know
                 val itemName = listview.getItemAtPosition(position)
                 Toast.makeText(applicationContext,
                     "Item Value : $itemName has been removed", Toast.LENGTH_LONG)
                     .show()
 
-            //    val filetext: MutableList<String>  = file.bufferedReader().readLines().toMutableList()
-
+                // deletes specific item then resets the file
                 Log.d("not empty", "write to file")
                 val path = applicationContext.getFilesDir()
                 val letDirectory = File(path, "LET")
@@ -123,27 +123,23 @@ class List_Options : AppCompatActivity() {
                 val file = File(letDirectory, "test.txt")
                 filetext.removeAt(position)
                 file.delete()
+
+                // reset file
                 file.createNewFile()
                 var restaurant=""
                 for (line in filetext) {
                     restaurant = line + "\n"
                     file.appendText(restaurant)
-                }
+                } // end for
 
 
                 val filetext: MutableList<String>  = file.bufferedReader().readLines().toMutableList()
                 println("Del Size: ${filetext.size}")
                 //  my custom adapter telling my list what to restaurants show
                 listview.adapter = MyAdapter(this@List_Options, filetext)
-              //  finish()
-               // startActivity(intent)
-            }
-
-
-
-        }
-
-    } // end oncreate
+            } // end on click event
+        } // on click object
+    } // end on create
 
     //------------------------------------------------------------------------------------------
 
@@ -161,23 +157,22 @@ class List_Options : AppCompatActivity() {
 
         //------------------------------------------------------------------------------------------
 
-
         // creates each row
         override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
             val inflator = LayoutInflater.from(myContext)
             val listRow = inflator.inflate(R.layout.list_row, viewGroup, false)
 
+            // sets the roulette #
             val textViewIndex = listRow.findViewById<TextView>(R.id.txtvindex)
             val roulettePos = (position % 10) + 1
             textViewIndex.text = "ROULETTE # $roulettePos"
 
+            // get name
             val textViewNames = listRow.findViewById<TextView>(R.id.txtvlocation)
             textViewNames.text = locations.get(position)
 
             return listRow
         } // end getView
-
-
 
         //------------------------------------------------------------------------------------------
 

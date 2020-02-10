@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_about_me.*
 
-
 class AboutMe : AppCompatActivity(){
 
      private var roulNum: Int=7
@@ -17,33 +16,28 @@ class AboutMe : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_me)
 
-
-
         btnBack.setOnClickListener {
             Log.d("list", "list button was pressed")
             startActivity(Intent(this, MainActivity::class.java))
-        }
+        } // end button back
+
+        //------------------------------------------------------------------------------------------
 
         btn_redo.setOnClickListener {
             numClick += 1
 
+            // initial load
             Log.d("redo", "redo button was pressed")
-            //  roulNum = 7
-            //    roul.setImageResource(R.drawable.roul7)
-
-            //val randomSeconds = (1000L..5000L).shuffled().first()
             var rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
             roul.startAnimation(rotateAnimation)
 
             if(numClick > 1) {
 
-
                 val randRotate = (1..22).shuffled().last()
 
-
+                // changes spinner based on buttons
                 when (randRotate) {
 
-                    //     1 ->  rotateAnimation =  AnimationUtils.loadAnimation(this,R.anim.rotate)
                     2 -> rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate2)
                     3 -> rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate3)
                     4 -> rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate4)
@@ -68,60 +62,14 @@ class AboutMe : AppCompatActivity(){
 
                     else -> {
                         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate23)
-                    }
-                }
+                    } // end else
+                } // end when
                 roul.startAnimation(rotateAnimation)
                 numClick=0
-            }
+            } // if second click
+        } // end button redo
 
-
-
-
-           //  timer(randomSeconds.toLong(), countDownInterval).start()
-
-
-
-          //  val handler = Handler()
-        //    handler.postDelayed(randomSeconds.toLong(), {})
-
-        //    var x =0
-          //  while(x < randomDegrees) {
-
-         //       x += 1
-        //    }
-          ///  roul.rotate(randomDegrees)
-       //    RotateDra
-
-
-/*
-            rotateAnimation = RotateAnimation(0f, 359f, .50f, .50f )
-            rotateAnimation.duration = 5000
-            rotateAnimation.repeatCount = 0
-
-
-            //Either way you can add Listener like this
-            rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
-
-                override fun onAnimationStart(animation: Animation?) {
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-
-                  //  val rand = Random()
-                 //   val ballHit = rand.nextInt(50) + 1
-                   // Toast.makeText(context, "ballHit : " + ballHit, Toast.LENGTH_SHORT).show()
-                }
-            })
-
-            roul.startAnimation(rotateAnimation)
-
-*/
-        }
-
-        //--------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
 
         btn_addRoul.setOnClickListener {
             Log.d("roul", "add button was pressed")
@@ -144,7 +92,7 @@ class AboutMe : AppCompatActivity(){
             } // end switch
         } // end add roul
 
-        //--------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
 
         btn_delRoul.setOnClickListener {
             Log.d("roul", "minus button was pressed")
@@ -167,11 +115,6 @@ class AboutMe : AppCompatActivity(){
             } // end switch
         } // end delRoul
 
-        //--------------------------------------------------------------------
-
-
-
-    }
-
-
-}
+        //------------------------------------------------------------------------------------------
+    } // end create
+} // end activity
