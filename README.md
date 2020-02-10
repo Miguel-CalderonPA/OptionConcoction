@@ -1,4 +1,4 @@
-# OptionConcoction
+# Option Concoction
 
 An android app, a mean to solve indecision (food places were in mind)
 
