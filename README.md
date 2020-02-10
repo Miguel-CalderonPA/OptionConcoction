@@ -1,6 +1,6 @@
 # OptionConcoction
 
-An android app, mean to solve indecision (food places were in mind)
+An android app, a mean to solve indecision (food places were in mind)
 
 # What I Learned
 * Much more kotlin, almost 0 experience beforehand
