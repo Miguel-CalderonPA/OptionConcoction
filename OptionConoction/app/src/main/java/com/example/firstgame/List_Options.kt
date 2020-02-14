@@ -1,6 +1,7 @@
 package com.example.firstgame
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,8 @@ import android.widget.ListView
 import android.widget.Toast
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_list_options.btnBack
+import kotlinx.android.synthetic.main.activity_top3.*
 
 class List_Options : AppCompatActivity() {
     // GLOBALS
@@ -29,15 +32,11 @@ class List_Options : AppCompatActivity() {
         val  newColor = Color.parseColor("#DDBE19")
         listview.setBackgroundColor(newColor)
 
-
-
         //------------------------------------------------------------------------------------------
 
         btn_addR.setOnClickListener {
-
+            Log.d("list", "add to list was clicked")
             var newRestaurant: String = txt_NewR.text.toString()
-
-            //--------------------------------------------------------------------------------------
 
             if(newRestaurant.trim().isEmpty()) {
                 Log.d("Add Clicked", "new restaurant to added")
@@ -50,7 +49,7 @@ class List_Options : AppCompatActivity() {
                 newRestaurant = newRestaurant + "\n"
 
                 // Logs and does File I/O
-                Log.d("not empty", "write to file")
+                Log.d("added", "to file")
                 val path = applicationContext.getFilesDir()
                 val letDirectory = File(path, "LET")
                 letDirectory.mkdirs()
@@ -60,7 +59,7 @@ class List_Options : AppCompatActivity() {
                 // reset filetext
                 val filetext: MutableList<String>  = file.bufferedReader().readLines().toMutableList()
                 println("Adding size: ${filetext.size}")
-
+                Log.d("added", "to file")
                 //  my custom adapter telling my list what to restaurants show
                 listview.adapter = MyAdapter(this, filetext)
 
@@ -72,7 +71,7 @@ class List_Options : AppCompatActivity() {
                     println("$pos")
                 } */
 
-                // needs revising
+                // needs revising!!!
                 finish()
                 overridePendingTransition(0, 0)
                 startActivity(intent)
@@ -83,6 +82,10 @@ class List_Options : AppCompatActivity() {
         //------------------------------------------------------------------------------------------
 
 
+        btnBack.setOnClickListener {
+            Log.d("random", "random button was selected")
+            startActivity(Intent(this,  MainActivity::class.java))
+        } // end roulette
 
         //------------------------------------------------------------------------------------------
 
@@ -131,7 +134,7 @@ class List_Options : AppCompatActivity() {
                     restaurant = line + "\n"
                     file.appendText(restaurant)
                 } // end for
-
+                Log.d("deleted", "from file")
 
                 val filetext: MutableList<String>  = file.bufferedReader().readLines().toMutableList()
                 println("Del Size: ${filetext.size}")

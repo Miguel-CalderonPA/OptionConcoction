@@ -7,10 +7,13 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_about_me.*
-
+// Constants
+const val MAX_ROUL: Int=22
+const val MIN_ROUL: Int=1
 class AboutMe : AppCompatActivity(){
 
-     private var roulNum: Int=7
+    // PDMs
+    private var roulNum: Int=7
     private var numClick: Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,16 +27,17 @@ class AboutMe : AppCompatActivity(){
         //------------------------------------------------------------------------------------------
 
         btn_redo.setOnClickListener {
-            numClick += 1
-
             // initial load
             Log.d("redo", "redo button was pressed")
+            numClick += 1
+
+
             var rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
             roul.startAnimation(rotateAnimation)
 
             if(numClick > 1) {
 
-                val randRotate = (1..22).shuffled().last()
+                val randRotate = (MIN_ROUL..MAX_ROUL).shuffled().last()
 
                 // changes spinner based on buttons
                 when (randRotate) {
